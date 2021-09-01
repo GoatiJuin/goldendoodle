@@ -23,9 +23,9 @@ const DogBreedSelector = () => {
     }, [breedsList])
 
     const memoizedCallback = useCallback(() => {
-            fetchBreeds();
-        },[breedsList],
-      );
+        fetchBreeds();
+    }, [breedsList],
+    );
 
     const handleClick = (e) => {
         setSelectedBreed(breedsList.find(breed => breed.name === e.target.innerText));
@@ -44,21 +44,21 @@ const DogBreedSelector = () => {
             <div className="breed-list-container">
                 <DogBreedsList breedsList={breedsList} handleClick={handleClick} />
             </div>
-
         </section>
     )
 }
 
-const DogBreedsList = (props) => {
-    return (
-        <ul className="breed-list">
-            {props.breedsList && props.breedsList.map((breed) => {
-                return <li onClick={props.handleClick} key={breed.name}>{breed.name}</li>
-            })}
-        </ul>
-    )
+class DogBreedsList extends React.PureComponent {
+    render() {
+        return (
+            <ul className="breed-list">
+                {this.props.breedsList && this.props.breedsList.map((breed) => {
+                    return <li onClick={this.props.handleClick} key={breed.name}>{breed.name}</li>
+                })}
+            </ul>
+        )
+    }
 }
-
 
 export default DogBreedSelector;
 
