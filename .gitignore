@@ -1,8 +1,0 @@
-.DS_Store
-
-.vscode
-.idea
-
-node_modules
-.cache
-dist
