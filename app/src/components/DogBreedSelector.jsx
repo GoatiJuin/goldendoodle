@@ -6,23 +6,20 @@ const DogBreedSelector = () => {
     const [breedsList, setBreedsList] = useState();
     const [selectedBreed, setSelectedBreed] = useState();
 
-
     const memoizedCallback = useCallback(() => {
         const apiPromise = fetchDogBreeds();
         Promise.resolve(apiPromise).then(resp => {
             setBreedsList(resp);
         })
-    }, [setBreedsList]
-    );
+    }, [setBreedsList]);
 
+    const handleClick = useCallback((e) => {
+        setSelectedBreed(breedsList.find(breed => breed.name === e.target.innerText));
+    }, [breedsList])
 
     useEffect(() => {
         memoizedCallback();
     }, [memoizedCallback])
-
-    const handleClick = (e) => {
-        setSelectedBreed(breedsList.find(breed => breed.name === e.target.innerText));
-    }
 
     return (
         <section>
